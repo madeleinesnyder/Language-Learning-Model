@@ -1,0 +1,116 @@
+// Bayesian word learning model
+// Based on Xu, Tenenbaum (2007)
+// CEK, Fall 2016
+
+// structure of ontology / hypothesis space
+var o = 1/8
+var a = 1/8
+var b = 1/8
+var e = 1/8
+var c = 1/8
+var d = 1/8
+var f = 1/8
+var g = 1/8
+
+var prior = function (node)   {
+  if (node == 'o')
+    return 0;
+  if (node == 'a')
+    return o;
+  if (node == 'b' | (node == 'e'))
+    return a;
+  if (node == 'c' | (node == 'd'))
+    return b;
+  if (node == 'g' | (node == 'f'))
+    return e;
+}
+
+prior('b')
+
+var children = function (node)  {
+  if (node == 'o')
+    return ['a','b','e','c','d','f','g'];
+  if (node == 'a')
+    return ['b','e','c','d','f','g'];
+  if (node == 'b')
+    return ['c','d'];
+  if (node == 'e')
+    return ['f','g'];
+  else
+    return 0;
+}
+
+children('o')
+
+
+var likelihood = function (node)  {
+  Math.pow(prior(node),(-children(node).length))/sum(prior(children(node)))
+}
+
+likelihood('a')
+
+
+// var hypothesisSpace = [livingThing,animal,plant,dog,fish,tree,flower,labrador,dalmatian,salmon,trout,oak,pine,daisy,rose];
+
+// // --- HELPER ---
+// // Create array of length len with values value
+// var fillArray = function (value, len) {
+//   var a = [value];
+//   //if (a==1) return a;
+//   if (len == 1) return a;
+//   else {
+//     var b = a.concat(fillArray(value,len-1))
+//     return b;
+//   }
+// };
+
+// // --- HELPER ---
+// // check if arrays are equal
+// var arrEqual = function(a,b) {
+//   if (a.length!=b.length) return 0; //if length not equal, then arrs not equal
+//   if (a.length==0) return true; //if no more elements in arr, then successfully compared all
+//   var i = b.indexOf(a[0]); //first element of a
+//   if (i==-1) return 0; //if first element of a is not in b then return 0
+//   else return arrEqual(a.slice(1),b.splice(i,0));
+// };
+
+// // --- PRIOR ---
+// // Uniform prior over hyotheses in hypothesis space
+// var prior = function() {
+  
+//   var probs = fillArray((1/hypothesisSpace.length),hypothesisSpace.length); //array of probabilities
+//   //var p = categorical({vs: hypothesisSpace, ps: probs}); //sample single hypothesis from hypothesis space
+//   return categorical({vs: hypothesisSpace, ps: probs}); //sample single hypothesis from hypothesis space
+
+//   //return q;
+// };
+
+// // --- LIKELIHOOD ---
+// // h = prior distribution of hypotheses
+// // n = number of samples in X (length of observed data)
+// var likelihood = function(h,n) {
+  
+  
+//   var probs = fillArray((1/h.length),h.length); //create array of h.length with values 1/h.length
+//   var p = categorical({vs: h, ps: probs}); //sample from uniform distribution over elements in h
+//   if (n == 1) return [p]; //base case: return single sample if n = 1
+//   else return [p].concat(likelihood(h,n-1)); //recurse: add current sample with n-1 more samples
+// };
+
+// // --- POSTERIOR ---
+// //var posterior = Infer({method: "MCMC",samples: 100000},
+// //  function () {
+// //    var X = ["daisy"]; //observed data
+// //    var hypothesis = prior()
+// //    var data = likelihood(hypothesis,X.length)
+// //    condition(arrEqual(X,data))
+// //    return hypothesis
+// //});
+
+// //viz(posterior)
+// var h = prior()
+// var X = ["daisy","salmon","pine"]
+// var lik = likelihood(h,X.length);
+// print(h)
+// print(X)
+// print(lik)
