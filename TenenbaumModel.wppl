@@ -1,0 +1,105 @@
+// Bayesian word learning model
+// Based on Xu, Tenenbaum (2007)
+// CEK, Fall 2016
+
+///fold:
+// words
+var rose = 'rose'
+var daisy = 'daisy'
+var pine = 'pine'
+var oak = 'oak'
+var trout = 'trout'
+var salmon = 'salmon'
+var dalmatian = 'dalmatian'
+var labrador = 'labrador'
+var flower = 'flower'
+var tree = 'tree'
+var fish = 'fish'
+var dog = 'dog'
+var plant = 'plant'
+var animal = 'animal'
+var livingThing = 'livingThing'
+
+var hypothesisSpace = [rose,daisy,pine,oak,trout,salmon,dalmatian,labrador,flower,tree,fish,dog,plant,animal,livingThing];
+
+// get parent of word
+var getParent = function(word) {
+  if (word=='rose') {return flower}
+  if (word=='daisy') {return flower}
+  if (word=='pine') {return tree}
+  if (word=='oak') {return tree}
+  if (word=='trout') {return fish}
+  if (word=='salmon') {return fish}
+  if (word=='dalmatian') {return dog}
+  if (word=='labrador') {return dog}
+  if (word=='flower') {return plant}
+  if (word=='tree') {return plant}
+  if (word=='fish') {return animal}
+  if (word=='dog') {return animal}
+  if (word=='plant') {return livingThing}
+  if (word=='animal') {return livingThing}
+  if (word=='livingThing') {return 0}
+}
+
+// get length of set of all possible referents for word
+// essentially the same as height...
+// this ought to be changed to height as in appendix of paper
+var getLength = function(word) {
+  if (word=='rose') {return 1}
+  if (word=='daisy') {return 1}
+  if (word=='pine') {return 1}
+  if (word=='oak') {return 1}
+  if (word=='trout') {return 1}
+  if (word=='salmon') {return 1}
+  if (word=='dalmatian') {return 1}
+  if (word=='labrador') {return 1}
+  if (word=='flower') {return 2}
+  if (word=='tree') {return 2}
+  if (word=='fish') {return 2}
+  if (word=='dog') {return 2}
+  if (word=='plant') {return 4}
+  if (word=='animal') {return 4}
+  if (word=='livingThing') {return 8}               
+}
+
+// check whether child is descendent of parent
+var isChild = function(child,parent) {
+  if (child==0) {return false;}
+  else {
+    if (child==parent) {return true;}
+    else {return isChild(getParent(child),parent);}
+  }
+}
+
+// Create array of length len with values value
+var fillArray = function (value, len) {
+  var a = [value];
+  //if (a==1) return a;
+  if (len == 1) return a;
+  else {
+    var b = a.concat(fillArray(value,len-1))
+    return b;
+  }
+};
+///
+
+// uniform prior over hypothesis space
+var prior = function() {
+  var probs = fillArray((1/hypothesisSpace.length),hypothesisSpace.length); //array of probabilities
+  return sample(Categorical({vs: hypothesisSpace, ps: probs})); //sample single hypothesis from hypothesis space
+};
+
+var observedData = [rose,rose,rose,rose];
+
+var posterior = Infer({method: 'MCMC',samples: 10000},function() {
+  var hypothesis = prior();
+  var obsFn = function(datum) {
+    // successful with prob(length(h)^X.length) given that datum is child of hypothesis 
+    condition(isChild(datum,hypothesis) && flip(getLength(hypothesis)*datum.length))
+              //flip(1/Math.pow(getLength(hypothesis),observedData.length))
+              }
+  mapData({data: observedData}, obsFn)
+  return hypothesis;
+});
+
+viz.auto(posterior)
