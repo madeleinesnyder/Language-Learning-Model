@@ -1,0 +1,46 @@
+var xCenter = worldWidth / 2
+var ground = {shape: 'rect', static: true, dims: [worldWidth, 10], x: worldWidth/2, y: worldHeight}
+var dimA = function() { gaussian(30,10) };
+var dimB = function() { gaussian(30,25) };
+var xpos = function(prevBlock) {
+  var prevW = prevBlock.dims[0]
+  var prevX = prevBlock.x
+  uniform(prevX - prevW, prevX + prevW)
+};
+
+var ypos = function(prevBlock, h) {
+  var prevY = prevBlock.y
+  var prevH = prevBlock.dims[1]
+  prevY - (prevH + h)
+};
+
+var addBlockA = function(prevBlock, isFirst) {
+  var w = dimA()
+  var h = dimA()
+  return {shape: 'rect',
+          static: false,
+          dims: [w, h],
+          x: isFirst ? xCenter : xpos(prevBlock),
+          y: ypos(prevBlock, h)}
+};
+
+var addBlockB = function(prevBlock, isFirst) {
+  var w = dimB()
+  var h = dimB()
+  return {shape: 'rect',
+          static: false,
+          dims: [w, h],
+          x: isFirst ? xCenter : xpos(prevBlock),
+          y: ypos(prevBlock, h)}
+};
+
+var makeTowerWorld = function () {
+  var block1 = addBlockA(ground, true);
+  var block2 = addBlockB(block1, false);
+  var block3 = addBlockB(block2, false);
+  var block4 = addBlockA(block3, false);
+  var block5 = addBlockA(block4, false);
+  return [ground, block1, block2, block3, block4, block5]
+};
+
+physics.animate(1000, makeTowerWorld())

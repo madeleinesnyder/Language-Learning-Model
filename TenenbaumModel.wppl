@@ -103,3 +103,5 @@ var posterior = Infer({method: 'MCMC',samples: 10000},function() {
 });
 
 viz.auto(posterior)
+
+
