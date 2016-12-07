@@ -1,0 +1,66 @@
+// Robot factory generative model
+// CEK, December 2016
+
+// ----------- define properties -------------------
+
+var dim_high = function () { uniform(15, 60) }
+var dim_low = function () { uniform(25, 40) }
+var dim_static = function () { 10 }
+var dim_body1 = function () { 20 }
+var dim_body2 = function () { 1 }
+var dim_eye = function () { 4 }
+//var shape = function () { flip() ? 'circle' : 'rect' }
+var shape = function () { 'rect' }
+var xpos = function (x) { x }//worldWidth/2}//uniform(100, worldWidth - 100) }
+var ypos = function (y) { y }//worldHeight/2}//uniform(100, worldHeight - 100) }
+var eye = function () { 'circle' }
+var ground = {shape: 'rect',
+              static: true,
+              dims: [worldWidth, 10],
+              x: worldWidth/2,
+              y: worldHeight}
+
+// ----------- shared features -------------------
+
+var body = function () {
+  return {shape: shape(), static: true, dims: [dim_body2(), dim_body1()], x: xpos(worldWidth/2), y: ypos(worldHeight-50)}
+}
+
+var eye1 = function () {
+  return {shape: eye(), static: true, dims: [dim_eye(), dim_eye()], x: xpos(worldWidth/2 - 7), y: ypos(worldHeight - 78.5)}
+}
+
+var eye2 = function () {
+  return {shape: eye(), static: true, dims: [dim_eye(), dim_eye()], x: xpos(worldWidth/2 + 7), y: ypos(worldHeight - 78.5)}
+}
+
+// ----------- robot type 1 -------------------
+
+var bottom1 = function () {
+  return {shape: shape(), static: true, dims: [dim_high() + 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight- 20)}
+}
+
+var top1 = function () {
+  return {shape: shape(), static: true, dims: [dim_low() + 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight - 80)}
+}
+
+var robot1 = [ground, top1(), bottom1(), body(), eye1(), eye2()]
+
+// ----------- robot type 2 -------------------
+
+var bottom2 = function () {
+  return {shape: shape(), static: true, dims: [dim_high() - 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight- 20)}
+}
+
+var top2 = function () {
+  return {shape: shape(), static: true, dims: [dim_low() - 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight - 80)}
+}
+
+var robot2 = [ground, top2(), bottom2(), body(), eye1(), eye2()]
+
+// ----------- create world -------------------
+
+var whichRobot = function () { flip() ? robot1 : robot2 }
+
+var fallingWorld = whichRobot()
+physics.animate(10,fallingWorld);
