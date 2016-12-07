@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  3 DEC 2016 23:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  7 DEC 2016 15:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -678,4 +678,66 @@ G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX L
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+LaTeX Font Info:    Try loading font information for OT1+jkp on input line 16.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/kpfonts/ot1jkp.fd
+File: ot1jkp.fd 2007/08/30 Fontinst v1.928 font definitions for OT1/jkp.
+)
+LaTeX Font Info:    Try loading font information for U+jkpmia on input line 16.
+
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/kpfonts/ujkpmia.fd
+File: ujkpmia.fd 2006/08/15 v1.0
+)
+LaTeX Font Info:    Try loading font information for U+jkpsya on input line 16.
+
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/kpfonts/ujkpsya.fd
+File: ujkpsya.fd 2006/08/15 v1.0
+)
+LaTeX Font Info:    Try loading font information for U+jkpsyb on input line 16.
+
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/kpfonts/ujkpsyb.fd
+File: ujkpsyb.fd 2006/08/15 v1.0
+)
+LaTeX Font Info:    Try loading font information for U+jkpsyc on input line 16.
+
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/kpfonts/ujkpsyc.fd
+File: ujkpsyc.fd 2006/08/15 v1.0
+)
+LaTeX Font Info:    Try loading font information for TS1+ybv on input line 28.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/baskervald/ts1ybv.fd
+File: ts1ybv.fd 2010/07/13 Fontinst v1.933 font definitions for TS1/ybv.
+) [1
+
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
+(./Writeup.aux) ) 
+Here is how much of TeX's memory you used:
+ 5076 strings out of 493117
+ 65841 string characters out of 6135433
+ 213191 words of memory out of 5000000
+ 8428 multiletter control sequences out of 15000+600000
+ 46490 words of font info for 86 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 38i,6n,35p,469b,210s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/base/8r.en
+c}{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/baskervald/supp-ybv.enc}<
+/usr/local/texlive/2014/texmf-dist/fonts/type1/public/kpfonts/jkpex.pfb></usr/l
+ocal/texlive/2014/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/t
+exlive/2014/texmf-dist/fonts/type1/public/kpfonts/jkpmia.pfb></usr/local/texliv
+e/2014/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/20
+14/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb></usr/local/texlive/2014/tex
+mf-dist/fonts/type1/arkandis/baskervald/ybvr8a.pfb>
+Output written on Writeup.pdf (2 pages, 61755 bytes).
+PDF statistics:
+ 39 PDF objects out of 1000 (max. 8388607)
+ 28 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

@@ -3,12 +3,12 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx, color}
 \setlength{\topmargin}{-1in}
-\linespread{1.5}
+\linespread{1}
 \usepackage[T1]{fontenc}
 \usepackage{kpfonts,baskervald}
 \usepackage{lipsum}
 
-\title{How do we sort these goddamn robots: Label availability changes object classification}
+\title{How do we sort these goddamn robots: Label availability changes object classification method}
 \author{Cody Kommers, Maddie Snyder}
 \date{December 2016}
 
@@ -17,14 +17,45 @@
 
 \noindent How do we sort objects into categories in the world? Typically, in the mind, objects are inextricably tied to their word labels. Seeing a tree evokes the word `tree', seeing your friend evokes their name, etc. 
 
+\vspace{.2in}
+
 \noindent Here we build a model of image categorization in which the categorization of objects is dependent on the labeled examples available during learning. If there is one labeled object presented, generalization of the label category will occur across objects that are most similar along the dimension of lowest visual variance. If there is more than one object labeled, then generalization will occur across the dimension of highest visual variance. 
 
-\vspace{.5in}
+\vspace{.2in}
+
+\noindent Generative model parameters (in parens refers to term in the code):
+\begin{itemize}
+	\item Robot head length $\sim N(\mu_1, \sigma_1)$ (Top)
+	\item Robot body length $\sim N(\mu_2, \sigma_2)$ (Bottom)
+	\item **Head length - Body Length = Diff $\sim N(\mu_1 - \mu_2, \sigma_1 + \sigma_2)$ (Diff)
+	\item Uniform distance between Head and Body (Body)
+	\item $\sigma_1 << \sigma_2$
+\end{itemize}
 
 \noindent Schema: 
 
+\noindent (1.1) Robots generated according to model defined above
 
+\noindent (1.2) Subjects presented with a variety of robots with one robot labeled "FEP"
 
-\noindent Confounding factor: Subjects may judge ''fepness'' by the difference between the lengths of the head and the body. BUT this might actually be the dimension of lowest variance, visually. 
+\noindent (1.3) Subjects presented with another labeled robot that was previously unlabeled and are asked to judge if it's a "FEP"
+
+\noindent (2.1) Subjects presented with a variety of robots with three robots labeled "FEP"
+
+\noindent (2.2) Subjects presented with another labeled robot that was previously unlabeled and are asked to judge if it's a "FEP"
+
+\vspace{0.2in}
+
+\noindent **Confounding factor: Subjects may judge ``fepness'' by the difference between the lengths of the head and the body. BUT this might actually be the dimension of lowest variance, visually.
+
+\vspace{0.2in}
+
+\noindent Diff $\sim FoldedNormal(\mu,\sigma)$ where $\mu_Y = \sigma \sqrt{\frac{2}{\pi}}e^{(-\mu^2/2\sigma^2)} + \mu (1-2\Phi(\frac{-\mu}{\sigma}))$ and $\sigma_Y = \mu^2 + \sigma^2 - \mu_Y ^2$
+
+\noindent What is the "variance" of color?
+
+\noindent What is the "variance" of pattern?
+
+\noindent Would the effect of categorizing by difference between Head and Body length be eliminated if you shortened the presentation time?
 
 \end{document}

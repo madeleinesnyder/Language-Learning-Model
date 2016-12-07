@@ -5,6 +5,9 @@
 
 var dim_high = function () { uniform(15, 60) }
 var dim_low = function () { uniform(25, 40) }
+var dimA = function() { gaussian(30,10) };
+var dimB = function() { gaussian(30,25) }
+var HeadBodySpace = function() {gaussian(0,35)}
 var dim_static = function () { 10 }
 var dim_body1 = function () { 20 }
 var dim_body2 = function () { 1 }
@@ -37,30 +40,41 @@ var eye2 = function () {
 // ----------- robot type 1 -------------------
 
 var bottom1 = function () {
-  return {shape: shape(), static: true, dims: [dim_high() + 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight- 20)}
+  return {shape: shape(), static: true, dims: [dimB() + 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight- 20)}
 }
 
 var top1 = function () {
-  return {shape: shape(), static: true, dims: [dim_low() + 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight - 80)}
+  return {shape: shape(), static: true, dims: [dimA() + 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight - 80)}
 }
 
 var robot1 = [ground, top1(), bottom1(), body(), eye1(), eye2()]
+//var head1 = top1().dims[0]
+//var body1 = bottom1().dims[0]
+//var HeadBodySpacing1 = top1().dims[0] - bottom1().dims[0]
+
 
 // ----------- robot type 2 -------------------
 
 var bottom2 = function () {
-  return {shape: shape(), static: true, dims: [dim_high() - 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight- 20)}
+  return {shape: shape(), static: true, dims: [dimB() - 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight- 20)}
 }
 
 var top2 = function () {
-  return {shape: shape(), static: true, dims: [dim_low() - 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight - 80)}
+  return {shape: shape(), static: true, dims: [dimA() - 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight - 80)}
 }
 
 var robot2 = [ground, top2(), bottom2(), body(), eye1(), eye2()]
+//var head2 = top2().dims[0]
+//var body2 = bottom2().dims[0]
+//var HeadBodySpacing2 = top2().dims[0] - bottom2().dims[0]
 
 // ----------- create world -------------------
 
 var whichRobot = function () { flip() ? robot1 : robot2 }
 
 var fallingWorld = whichRobot()
+print(fallingWorld[1].dims[0])
+print(fallingWorld[2].dims[0])
+print(fallingWorld[1].dims[0]-fallingWorld[2].dims[0])
+
 physics.animate(10,fallingWorld);
