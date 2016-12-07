@@ -3,11 +3,11 @@
 
 // ----------- define properties -------------------
 
-var dim_high = function () { uniform(15, 60) }
-var dim_low = function () { uniform(25, 40) }
-var dimA = function() { gaussian(30,10) };
-var dimB = function() { gaussian(30,25) }
-var HeadBodySpace = function() {gaussian(0,35)}
+var dim_high_a = function () { gaussian(30, 20) }
+var dim_high_b = function () { gaussian(50, 20) }
+//var dim_low_1 = function () { gaussian(20, 5) }
+//var dim_low_2 = function () { gaussian(40, 5) }
+var dim_low = function () { flip() ? gaussian(20,5) : gaussian(40,5)}
 var dim_static = function () { 10 }
 var dim_body1 = function () { 20 }
 var dim_body2 = function () { 1 }
@@ -26,7 +26,11 @@ var ground = {shape: 'rect',
 // ----------- shared features -------------------
 
 var body = function () {
-  return {shape: shape(), static: true, dims: [dim_body2(), dim_body1()], x: xpos(worldWidth/2), y: ypos(worldHeight-50)}
+  return {shape: shape(), 
+          static: true, 
+          dims: [dim_body2(), dim_body1()], 
+          x: xpos(worldWidth/2), 
+          y: ypos(worldHeight-50)}
 }
 
 var eye1 = function () {
@@ -37,44 +41,32 @@ var eye2 = function () {
   return {shape: eye(), static: true, dims: [dim_eye(), dim_eye()], x: xpos(worldWidth/2 + 7), y: ypos(worldHeight - 78.5)}
 }
 
+var top = function () {
+  return {shape: shape(), static: true, dims: [dim_low(), dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight - 80)}
+}
+
+
 // ----------- robot type 1 -------------------
 
-var bottom1 = function () {
-  return {shape: shape(), static: true, dims: [dimB() + 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight- 20)}
+var bottom_a = function () {
+  return {shape: shape(), static: true, dims: [dim_high_a(), dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight- 20)}
 }
 
-var top1 = function () {
-  return {shape: shape(), static: true, dims: [dimA() + 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight - 80)}
-}
-
-var robot1 = [ground, top1(), bottom1(), body(), eye1(), eye2()]
-//var head1 = top1().dims[0]
-//var body1 = bottom1().dims[0]
-//var HeadBodySpacing1 = top1().dims[0] - bottom1().dims[0]
+var robot_a=[ground, top(), bottom_a(), body(), eye1(), eye2()];
 
 
 // ----------- robot type 2 -------------------
 
-var bottom2 = function () {
-  return {shape: shape(), static: true, dims: [dimB() - 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight- 20)}
+var bottom_b = function () {
+  return {shape: shape(), static: true, dims: [dim_high_b(), dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight- 20)}
 }
 
-var top2 = function () {
-  return {shape: shape(), static: true, dims: [dimA() - 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight - 80)}
-}
+var robot_b=[ground, top(), bottom_b(), body(), eye1(), eye2()];
 
-var robot2 = [ground, top2(), bottom2(), body(), eye1(), eye2()]
-//var head2 = top2().dims[0]
-//var body2 = bottom2().dims[0]
-//var HeadBodySpacing2 = top2().dims[0] - bottom2().dims[0]
 
 // ----------- create world -------------------
 
-var whichRobot = function () { flip() ? robot1 : robot2 }
+var whichRobot = function () { flip() ? robot_a : robot_b }
 
 var fallingWorld = whichRobot()
-print(fallingWorld[1].dims[0])
-print(fallingWorld[2].dims[0])
-print(fallingWorld[1].dims[0]-fallingWorld[2].dims[0])
-
 physics.animate(10,fallingWorld);
