@@ -1,0 +1,461 @@
+<html lang="en"><head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Generative models - exercises</title>
+
+    <link rel="stylesheet" href="https://probmods.org/v2/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://probmods.org/v2/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://probmods.org/v2/assets/css/default.css">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text|Inconsolata" rel="stylesheet">
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script><script src="https://probmods.org/v2/assets/js/ga.js"></script>
+    <script src="https://probmods.org/v2/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="https://probmods.org/v2/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://probmods.org/v2/bower_components/underscore/underscore.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    
+      
+      <link rel="stylesheet" href="https://probmods.org/v2/bower_components/KaTeX/dist/katex.min.css" media="screen" type="text/css">
+      
+      <link rel="stylesheet" href="https://probmods.org/v2/bower_components/bigfoot/dist/bigfoot-default.css" media="screen" type="text/css">
+      
+    
+    
+      
+      <link rel="stylesheet" href="//s3-us-west-2.amazonaws.com/cdn.webppl.org/webppl-viz-41e5d24.css" media="screen" type="text/css">
+      
+      <link rel="stylesheet" href="//s3-us-west-2.amazonaws.com/cdn.webppl.org/webppl-editor-70882ed.css" media="screen" type="text/css">
+      
+    
+    
+    
+      
+      <script src="https://probmods.org/v2/bower_components/KaTeX/dist/katex.min.js" type="text/javascript"></script>
+      
+      <script src="https://probmods.org/v2/bower_components/bigfoot/dist/bigfoot.min.js" type="text/javascript"></script>
+      
+      <script src="https://probmods.org/v2/bower_components/paper/dist/paper-full.js" type="text/javascript"></script>
+      
+      <script src="https://probmods.org/v2/assets/js/parse-bibtex.js" type="text/javascript"></script>
+      
+      <script src="https://probmods.org/v2/assets/js/chapter.js" type="text/javascript"></script>
+      
+    
+    
+    
+    
+      
+      <script src="https://probmods.org/v2/assets/js/box2d.js" type="text/javascript"></script>
+      
+      <script src="https://probmods.org/v2/assets/js/physics.js" type="text/javascript"></script>
+      
+    
+  </head>
+  <body>
+
+    
+
+    <div class="container">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">☰</a>
+          <ul class="dropdown-menu">
+            <li><a href="https://probmods.org/v2/">Home</a></li>
+            <li role="separator" class="divider"></li>
+            
+            
+            <li><a href="https://probmods.org/v2/chapters/01-introduction.html">Introduction</a></li>
+            
+            
+            
+            
+            
+            <li><a href="https://probmods.org/v2/chapters/02-generative-models.html">Generative models</a></li>
+            
+            
+            
+            <li><a href="https://probmods.org/v2/chapters/03-conditioning.html">Conditioning</a></li>
+            
+            
+            
+            
+            
+            
+            
+            <li><a href="https://probmods.org/v2/chapters/04-patterns-of-inference.html">Patterns of inference</a></li>
+            
+            
+            
+            
+            
+            <li><a href="https://probmods.org/v2/chapters/05-observing-sequences.html">Models for sequences of observations</a></li>
+            
+            
+            
+            <li><a href="https://probmods.org/v2/chapters/06-inference-about-inference.html">Inference about inference</a></li>
+            
+            
+            
+            
+            
+            <li><a href="https://probmods.org/v2/chapters/07-inference-process.html">Algorithms for inference</a></li>
+            
+            
+            
+            
+            
+            <li><a href="https://probmods.org/v2/chapters/08-learning-as-conditional-inference.html">Learning as conditional inference</a></li>
+            
+            
+            
+            
+            
+            <li><a href="https://probmods.org/v2/chapters/09-hierarchical-models.html">Hierarchical models</a></li>
+            
+            
+            
+            
+            
+            <li><a href="https://probmods.org/v2/chapters/10-occam's-razor.html">Occam's Razor</a></li>
+            
+            
+            
+            <li><a href="https://probmods.org/v2/chapters/11-mixture-models.html">Mixture models</a></li>
+            
+            
+            
+            <li><a href="https://probmods.org/v2/chapters/12-non-parametric-models.html">Non-parametric models</a></li>
+            
+            
+            
+            
+            
+            <li><a href="https://probmods.org/v2/chapters/13-appendix-js-basics.html">Appendix - JavaScript basics</a></li>
+            
+            
+            
+            <li><a href="https://probmods.org/v2/chapters/14-bayesian-data-analysis.html">Bayesian data analysis</a></li>
+            
+            
+            
+            
+            
+            
+            
+            
+          </ul>
+        </li>
+      </ul>
+
+      <div class="page-header">
+  <h1>Generative models - exercises</h1>
+</div>
+
+<h2 id="exercise-1">Exercise 1</h2>
+
+<p>Here are three WebPPL programs:</p>
+
+<div class="highlighter-rouge"><div><div data-reactroot="" class="wpedit"><div class="ReactCodeMirror"><textarea autocomplete="off" style="display: none;">flip() ? flip(.7) : flip(.1)</textarea><div class="CodeMirror cm-s-default"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true" style="width: 18px; pointer-events: none;"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true" style="height: 18px; pointer-events: none;"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; min-width: 203px; margin-bottom: 0px; border-right-width: 30px; min-height: 28px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 20px;">&nbsp;</div></div><div class="CodeMirror-code"><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-variable">flip</span>() <span class="cm-operator">?</span> <span class="cm-variable">flip</span>(<span class="cm-number">.7</span>) : <span class="cm-variable">flip</span>(<span class="cm-number">.1</span>)</span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent; top: 28px;"></div><div class="CodeMirror-gutters" style="display: none; height: 58px;"></div></div></div></div><button class="run" type="button">run</button><button class="cancel hide">cancel</button><button class="drawerButton">▼</button><div class="meta hide"><div><b>webppl</b><!-- react-text: 10 -->: <!-- /react-text --><!-- react-text: 11 -->v0.9.6-a3fae91<!-- /react-text --></div><div><b>packages</b><!-- react-text: 14 -->: <!-- /react-text --><!-- react-text: 15 --><!-- /react-text --></div><div><b>seed</b><!-- react-text: 18 -->: <!-- /react-text --></div><div><b>compile</b><!-- react-text: 21 -->: <!-- /react-text --></div><div><b>run</b><!-- react-text: 24 -->: <!-- /react-text --></div></div><div class="result  hide" style="min-height: 0px;"><button class="clearButton idle">X</button></div></div></div>
+</div>
+
+<div class="highlighter-rouge"><div><div data-reactroot="" class="wpedit"><div class="ReactCodeMirror"><textarea autocomplete="off" style="display: none;">flip(flip() ? .7 : .1)</textarea><div class="CodeMirror cm-s-default"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true" style="width: 18px; pointer-events: none;"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true" style="height: 18px; pointer-events: none;"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; min-width: 161px; margin-bottom: 0px; border-right-width: 30px; min-height: 28px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 20px;">&nbsp;</div></div><div class="CodeMirror-code"><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-variable">flip</span>(<span class="cm-variable">flip</span>() <span class="cm-operator">?</span> <span class="cm-number">.7</span> : <span class="cm-number">.1</span>)</span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent; top: 28px;"></div><div class="CodeMirror-gutters" style="display: none; height: 58px;"></div></div></div></div><button class="run" type="button">run</button><button class="cancel hide">cancel</button><button class="drawerButton">▼</button><div class="meta hide"><div><b>webppl</b><!-- react-text: 10 -->: <!-- /react-text --><!-- react-text: 11 -->v0.9.6-a3fae91<!-- /react-text --></div><div><b>packages</b><!-- react-text: 14 -->: <!-- /react-text --><!-- react-text: 15 --><!-- /react-text --></div><div><b>seed</b><!-- react-text: 18 -->: <!-- /react-text --></div><div><b>compile</b><!-- react-text: 21 -->: <!-- /react-text --></div><div><b>run</b><!-- react-text: 24 -->: <!-- /react-text --></div></div><div class="result  hide" style="min-height: 0px;"><button class="clearButton idle">X</button></div></div></div>
+</div>
+
+<div class="highlighter-rouge"><div><div data-reactroot="" class="wpedit"><div class="ReactCodeMirror"><textarea autocomplete="off" style="display: none;">flip(.4)</textarea><div class="CodeMirror cm-s-default"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true" style="width: 18px; pointer-events: none;"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true" style="height: 18px; pointer-events: none;"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; min-width: 63px; margin-bottom: 0px; border-right-width: 30px; min-height: 28px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 20px;">&nbsp;</div></div><div class="CodeMirror-code"><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-variable">flip</span>(<span class="cm-number">.4</span>)</span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent; top: 28px;"></div><div class="CodeMirror-gutters" style="display: none; height: 58px;"></div></div></div></div><button class="run" type="button">run</button><button class="cancel hide">cancel</button><button class="drawerButton">▼</button><div class="meta hide"><div><b>webppl</b><!-- react-text: 10 -->: <!-- /react-text --><!-- react-text: 11 -->v0.9.6-a3fae91<!-- /react-text --></div><div><b>packages</b><!-- react-text: 14 -->: <!-- /react-text --><!-- react-text: 15 --><!-- /react-text --></div><div><b>seed</b><!-- react-text: 18 -->: <!-- /react-text --></div><div><b>compile</b><!-- react-text: 21 -->: <!-- /react-text --></div><div><b>run</b><!-- react-text: 24 -->: <!-- /react-text --></div></div><div class="result  hide" style="min-height: 0px;"><button class="clearButton idle">X</button></div></div></div>
+</div>
+
+<p>a) Show that the marginal distribution on return values for these three programs is the same by directly computing the probability using the rules of probability (hint: write down each possible history of random choices for each program). Check your answers by sampling from the programs.</p>
+
+<p>b)  Explain why these different-looking programs can give the same results.</p>
+
+<h2 id="exercise-2">Exercise 2</h2>
+
+<p>Explain why (in terms of the evaluation process) these two programs give different answers (i.e. have different distributions on return values):</p>
+
+<div class="highlighter-rouge"><div><div data-reactroot="" class="wpedit"><div class="ReactCodeMirror"><textarea autocomplete="off" style="display: none;">var foo = flip();
+display([foo, foo, foo]);</textarea><div class="CodeMirror cm-s-default"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true" style="width: 18px; pointer-events: none;"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true" style="height: 18px; pointer-events: none;"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; min-width: 182px; margin-bottom: 0px; border-right-width: 30px; min-height: 48px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 20px;">&nbsp;</div></div><div class="CodeMirror-code"><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">foo</span> <span class="cm-operator">=</span> <span class="cm-variable">flip</span>();</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-variable">display</span>([<span class="cm-variable">foo</span>, <span class="cm-variable">foo</span>, <span class="cm-variable">foo</span>]);</span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent; top: 48px;"></div><div class="CodeMirror-gutters" style="display: none; height: 78px;"></div></div></div></div><button class="run" type="button">run</button><button class="cancel hide">cancel</button><button class="drawerButton">▼</button><div class="meta hide"><div><b>webppl</b><!-- react-text: 10 -->: <!-- /react-text --><!-- react-text: 11 -->v0.9.6-a3fae91<!-- /react-text --></div><div><b>packages</b><!-- react-text: 14 -->: <!-- /react-text --><!-- react-text: 15 --><!-- /react-text --></div><div><b>seed</b><!-- react-text: 18 -->: <!-- /react-text --></div><div><b>compile</b><!-- react-text: 21 -->: <!-- /react-text --></div><div><b>run</b><!-- react-text: 24 -->: <!-- /react-text --></div></div><div class="result  hide" style="min-height: 0px;"><button class="clearButton idle">X</button></div></div></div>
+</div>
+
+<div class="highlighter-rouge"><div><div data-reactroot="" class="wpedit"><div class="ReactCodeMirror"><textarea autocomplete="off" style="display: none;">var foo = function() {return flip()};
+display([foo(), foo(), foo()]);</textarea><div class="CodeMirror cm-s-default"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true" style="width: 18px; pointer-events: none;"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true" style="height: 18px; pointer-events: none;"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; min-width: 266px; margin-bottom: 0px; border-right-width: 30px; min-height: 48px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 20px;">&nbsp;</div></div><div class="CodeMirror-code"><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">foo</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>() {<span class="cm-keyword">return</span> <span class="cm-variable">flip</span>()};</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-variable">display</span>([<span class="cm-variable">foo</span>(), <span class="cm-variable">foo</span>(), <span class="cm-variable">foo</span>()]);</span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent; top: 48px;"></div><div class="CodeMirror-gutters" style="display: none; height: 78px;"></div></div></div></div><button class="run" type="button">run</button><button class="cancel hide">cancel</button><button class="drawerButton">▼</button><div class="meta hide"><div><b>webppl</b><!-- react-text: 10 -->: <!-- /react-text --><!-- react-text: 11 -->v0.9.6-a3fae91<!-- /react-text --></div><div><b>packages</b><!-- react-text: 14 -->: <!-- /react-text --><!-- react-text: 15 --><!-- /react-text --></div><div><b>seed</b><!-- react-text: 18 -->: <!-- /react-text --></div><div><b>compile</b><!-- react-text: 21 -->: <!-- /react-text --></div><div><b>run</b><!-- react-text: 24 -->: <!-- /react-text --></div></div><div class="result  hide" style="min-height: 0px;"><button class="clearButton idle">X</button></div></div></div>
+</div>
+
+<p>How could you use <code class="highlighter-rouge">mem</code> to make the second program have the same distribution as the first?</p>
+
+<h2 id="exercise-3">Exercise 3</h2>
+
+<p>In the simple medical diagnosis example we imagined a generative process for the diseases and symptoms of a single patient. If we wanted to represent the diseases of many patients we might have tried to make each disease and symptom into a <em>function</em> from a person to whether they have that disease, like this:</p>
+
+<div class="highlighter-rouge"><div><div data-reactroot="" class="wpedit"><div class="ReactCodeMirror"><textarea autocomplete="off" style="display: none;">var lungCancer = function(person) {return flip(.01)};
+var cold = function(person) {return flip(.2)}
+
+var cough = function(person) {return cold(person) || lungCancer(person)}
+
+display([cough('bob'), cough('alice')])</textarea><div class="CodeMirror cm-s-default"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true" style="width: 18px; pointer-events: none;"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true" style="height: 18px; pointer-events: none;"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; min-width: 511px; margin-bottom: 0px; border-right-width: 30px; min-height: 128px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"><span><span>​</span>x</span></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 20px;">&nbsp;</div></div><div class="CodeMirror-code"><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">lungCancer</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>(<span class="cm-def">person</span>) {<span class="cm-keyword">return</span> <span class="cm-variable">flip</span>(<span class="cm-number">.01</span>)};</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">cold</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>(<span class="cm-def">person</span>) {<span class="cm-keyword">return</span> <span class="cm-variable">flip</span>(<span class="cm-number">.2</span>)}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">cough</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>(<span class="cm-def">person</span>) {<span class="cm-keyword">return</span> <span class="cm-variable">cold</span>(<span class="cm-variable-2">person</span>) <span class="cm-operator">||</span> <span class="cm-variable">lungCancer</span>(<span class="cm-variable-2">person</span>)}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-variable">display</span>([<span class="cm-variable">cough</span>(<span class="cm-string">'bob'</span>), <span class="cm-variable">cough</span>(<span class="cm-string">'alice'</span>)])</span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent; top: 128px;"></div><div class="CodeMirror-gutters" style="display: none; height: 158px;"></div></div></div></div><button class="run" type="button">run</button><button class="cancel hide">cancel</button><button class="drawerButton">▼</button><div class="meta hide"><div><b>webppl</b><!-- react-text: 10 -->: <!-- /react-text --><!-- react-text: 11 -->v0.9.6-a3fae91<!-- /react-text --></div><div><b>packages</b><!-- react-text: 14 -->: <!-- /react-text --><!-- react-text: 15 --><!-- /react-text --></div><div><b>seed</b><!-- react-text: 18 -->: <!-- /react-text --></div><div><b>compile</b><!-- react-text: 21 -->: <!-- /react-text --></div><div><b>run</b><!-- react-text: 24 -->: <!-- /react-text --></div></div><div class="result  hide" style="min-height: 0px;"><button class="clearButton idle">X</button></div></div></div>
+</div>
+
+<p>Why doesn’t this capture our intuitions correctly if we try to do the same thing for the more complex medical diagnosis example? How could we fix it?</p>
+
+<h2 id="exercise-4">Exercise 4</h2>
+
+<p>Work through the evaluation process for the <code class="highlighter-rouge">bend</code> higher-order function in this example:</p>
+
+<div class="highlighter-rouge"><div><div data-reactroot="" class="wpedit"><div class="ReactCodeMirror"><textarea autocomplete="off" style="display: none;">var makeCoin = function(weight) {
+  return function() {
+    return flip(weight) ? 'h' : 't'
+  }
+}
+var bend = function(coin) {
+  return function() {
+    return coin() == 'h' ? makeCoin(.7)() : makeCoin(.1)()
+  }
+}
+
+var fairCoin = makeCoin(.5)
+var bentCoin = bend(fairCoin)</textarea><div class="CodeMirror cm-s-default"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true" style="width: 18px; pointer-events: none;"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true" style="height: 18px; pointer-events: none;"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; min-width: 413px; margin-bottom: 0px; border-right-width: 30px; min-height: 268px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 20px;">&nbsp;</div></div><div class="CodeMirror-code"><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">makeCoin</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>(<span class="cm-def">weight</span>) {</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">  <span class="cm-keyword">return</span> <span class="cm-keyword">function</span>() {</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">    <span class="cm-keyword">return</span> <span class="cm-variable">flip</span>(<span class="cm-variable-2">weight</span>) <span class="cm-operator">?</span> <span class="cm-string">'h'</span> : <span class="cm-string">'t'</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">  }</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">bend</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>(<span class="cm-def">coin</span>) {</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">  <span class="cm-keyword">return</span> <span class="cm-keyword">function</span>() {</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">    <span class="cm-keyword">return</span> <span class="cm-variable-2">coin</span>() <span class="cm-operator">==</span> <span class="cm-string">'h'</span> <span class="cm-operator">?</span> <span class="cm-variable">makeCoin</span>(<span class="cm-number">.7</span>)() : <span class="cm-variable">makeCoin</span>(<span class="cm-number">.1</span>)()</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">  }</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">fairCoin</span> <span class="cm-operator">=</span> <span class="cm-variable">makeCoin</span>(<span class="cm-number">.5</span>)</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">bentCoin</span> <span class="cm-operator">=</span> <span class="cm-variable">bend</span>(<span class="cm-variable">fairCoin</span>)</span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent; top: 268px;"></div><div class="CodeMirror-gutters" style="display: none; height: 298px;"></div></div></div></div><button class="run" type="button">run</button><button class="cancel hide">cancel</button><button class="drawerButton">▼</button><div class="meta hide"><div><b>webppl</b><!-- react-text: 10 -->: <!-- /react-text --><!-- react-text: 11 -->v0.9.6-a3fae91<!-- /react-text --></div><div><b>packages</b><!-- react-text: 14 -->: <!-- /react-text --><!-- react-text: 15 --><!-- /react-text --></div><div><b>seed</b><!-- react-text: 18 -->: <!-- /react-text --></div><div><b>compile</b><!-- react-text: 21 -->: <!-- /react-text --></div><div><b>run</b><!-- react-text: 24 -->: <!-- /react-text --></div></div><div class="result  hide" style="min-height: 0px;"><button class="clearButton idle">X</button></div></div></div>
+</div>
+
+<p>Directly compute the probability distribution of the bent coin in the example. Check your answer by using <code class="highlighter-rouge">Infer</code>.</p>
+
+<!-- ToW was moved to next chapter....
+## Exercise 5
+
+Here is a modified version of the tug of war game. Instead of drawing strength from the continuous Gaussian distribution, strength is either 5 or 10 with equal probability. Also the probability of laziness is changed from 1/4 to 1/3. Here are four expressions you could evaluate using this modified model:
+
+~~~~
+var strength = mem(function(person) {
+  return flip() ? 5 : 10;
+});
+
+var lazy = function(person) {return flip(1/3)}
+var totalPulling = function(team) {
+  return sum(map(function(person) {
+    return lazy(person) ? strength(person) / 2 : strength(person);
+  }, team))
+}
+
+var winner = function(team1, team2) {
+  return totalPulling(team1) < totalPulling(team2) : team2 : team1;
+}
+
+// expression 1
+winner(['alice'], ['bob'])
+
+// expression 2
+_.isEqual(['alice'], winner(['alice'], ['bob']))
+
+// expression 3
+(_.isEqual(['alice'], winner(['alice'], ['bob'])) &&
+ _.isEqual(['alice'], winner(['alice'], ['fred'])))
+
+// expression 4
+(_.isEqual(['alice'], winner(['alice'], ['bob'])) &&
+ _.isEqual(['jane'], winner(['jane'], ['fred'])))
+~~~~
+
+a) Write down the sequence of expression evaluations and random choices that will be made in evaluating each expression.
+
+b) Directly compute the probability for each possible return value from each expression.
+
+c) Why are the probabilities different for the last two? Explain both in terms of the probability calculations you did and in terms of the "causal" process of evaluating and making random choices.
+
+-->
+
+<h2 id="exercise-5">Exercise 5</h2>
+
+<p>Use the rules of probability to compute the probability that the geometric distribution defined by the following stochastic recursion returns the number 5. Check your answer by using <code class="highlighter-rouge">Infer</code>.</p>
+
+<div class="highlighter-rouge"><div><div data-reactroot="" class="wpedit"><div class="ReactCodeMirror"><textarea autocomplete="off" style="display: none;">var geometric = function(p) {
+  return flip(p) ? 0 : 1 + geometric(p)
+};</textarea><div class="CodeMirror cm-s-default"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true" style="width: 18px; pointer-events: none;"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true" style="height: 18px; pointer-events: none;"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; min-width: 280px; margin-bottom: 0px; border-right-width: 30px; min-height: 68px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 20px;">&nbsp;</div></div><div class="CodeMirror-code"><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">geometric</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>(<span class="cm-def">p</span>) {</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">  <span class="cm-keyword">return</span> <span class="cm-variable">flip</span>(<span class="cm-variable-2">p</span>) <span class="cm-operator">?</span> <span class="cm-number">0</span> : <span class="cm-number">1</span> <span class="cm-operator">+</span> <span class="cm-variable">geometric</span>(<span class="cm-variable-2">p</span>)</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">};</span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent; top: 68px;"></div><div class="CodeMirror-gutters" style="display: none; height: 98px;"></div></div></div></div><button class="run" type="button">run</button><button class="cancel hide">cancel</button><button class="drawerButton">▼</button><div class="meta hide"><div><b>webppl</b><!-- react-text: 10 -->: <!-- /react-text --><!-- react-text: 11 -->v0.9.6-a3fae91<!-- /react-text --></div><div><b>packages</b><!-- react-text: 14 -->: <!-- /react-text --><!-- react-text: 15 --><!-- /react-text --></div><div><b>seed</b><!-- react-text: 18 -->: <!-- /react-text --></div><div><b>compile</b><!-- react-text: 21 -->: <!-- /react-text --></div><div><b>run</b><!-- react-text: 24 -->: <!-- /react-text --></div></div><div class="result  hide" style="min-height: 0px;"><button class="clearButton idle">X</button></div></div></div>
+</div>
+
+<h2 id="exercise-6">Exercise 6</h2>
+
+<p>Convert the following probability table to a compact WebPPL program:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>A</th>
+      <th>B</th>
+      <th>P(A,B)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>F</td>
+      <td>F</td>
+      <td>0.14</td>
+    </tr>
+    <tr>
+      <td>F</td>
+      <td>T</td>
+      <td>0.06</td>
+    </tr>
+    <tr>
+      <td>T</td>
+      <td>F</td>
+      <td>0.4</td>
+    </tr>
+    <tr>
+      <td>T</td>
+      <td>T</td>
+      <td>0.4</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Hint: fix the probability of A and then define the probability of B to <em>depend</em> on whether A is true or not.</p>
+
+<div class="highlighter-rouge"><div><div data-reactroot="" class="wpedit"><div class="ReactCodeMirror"><textarea autocomplete="off" style="display: none;">var a = ...
+var b = ...
+[a, b]</textarea><div class="CodeMirror cm-s-default"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5px; left: 5px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true" style="width: 18px; pointer-events: none;"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true" style="height: 18px; pointer-events: none;"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; min-width: 84px; margin-bottom: 0px; border-right-width: 30px; min-height: 68px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors"><div class="CodeMirror-cursor" style="left: 4px; top: 0px; height: 20px;">&nbsp;</div></div><div class="CodeMirror-code"><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">a</span> <span class="cm-operator">=</span> <span class="cm-meta">...</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-variable">b</span> <span class="cm-operator">=</span> <span class="cm-meta">...</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">[<span class="cm-variable">a</span>, <span class="cm-variable">b</span>]</span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent; top: 68px;"></div><div class="CodeMirror-gutters" style="display: none; height: 98px;"></div></div></div></div><button class="run" type="button">run</button><button class="cancel hide">cancel</button><button class="drawerButton">▼</button><div class="meta hide"><div><b>webppl</b><!-- react-text: 10 -->: <!-- /react-text --><!-- react-text: 11 -->v0.9.6-a3fae91<!-- /react-text --></div><div><b>packages</b><!-- react-text: 14 -->: <!-- /react-text --><!-- react-text: 15 --><!-- /react-text --></div><div><b>seed</b><!-- react-text: 18 -->: <!-- /react-text --></div><div><b>compile</b><!-- react-text: 21 -->: <!-- /react-text --></div><div><b>run</b><!-- react-text: 24 -->: <!-- /react-text --></div></div><div class="result  hide" style="min-height: 0px;"><button class="clearButton idle">X</button></div></div></div>
+</div>
+
+<p>Run your WebPPL program and use <code class="highlighter-rouge">Infer</code> to check that you get the correct distribution.</p>
+
+<h2 id="exercise-7">Exercise 7</h2>
+
+<p>In <strong>Example: Intuitive physics</strong> we modeled stability of a tower as the probability that the tower falls when perturbed, and we modeled “falling” as getting shorter. It would be reasonable to instead measure <em>how much shorter</em> the tower gets.</p>
+
+<p>a) Below, modify the stability model by writing a continuous measure, <code class="highlighter-rouge">towerFallDegree</code>. Make sure that your continuous measure is in some way numerically comparable to the discrete measure, <code class="highlighter-rouge">doesTowerFall</code> (defined here as either 0 or 1). Mathematically, what is your continuous measure?</p>
+
+<div class="highlighter-rouge"><div><div data-reactroot="" class="wpedit"><div class="ReactCodeMirror"><textarea autocomplete="off" style="display: none;">// Robot factory generative model
+// CEK, December 2016
+
+// ----------- define properties -------------------
+
+var dim_high = function () { uniform(15, 60) }
+var dim_low = function () { uniform(25, 40) }
+var dimA = function() { gaussian(30,10) };
+var dimB = function() { gaussian(30,25) }
+var dim_static = function () { 10 }
+var dim_body1 = function () { 20 }
+var dim_body2 = function () { 1 }
+var dim_eye = function () { 4 }
+//var shape = function () { flip() ? 'circle' : 'rect' }
+var shape = function () { 'rect' }
+var xpos = function (x) { x }//worldWidth/2}//uniform(100, worldWidth - 100) }
+var ypos = function (y) { y }//worldHeight/2}//uniform(100, worldHeight - 100) }
+var eye = function () { 'circle' }
+var ground = {shape: 'rect',
+              static: true,
+              dims: [worldWidth, 10],
+              x: worldWidth/2,
+              y: worldHeight}
+
+// ----------- shared features -------------------
+
+var body = function () {
+  return {shape: shape(), static: true, dims: [dim_body2(), dim_body1()], x: xpos(worldWidth/2), y: ypos(worldHeight-50)}
+}
+
+var eye1 = function () {
+  return {shape: eye(), static: true, dims: [dim_eye(), dim_eye()], x: xpos(worldWidth/2 - 7), y: ypos(worldHeight - 78.5)}
+}
+
+var eye2 = function () {
+  return {shape: eye(), static: true, dims: [dim_eye(), dim_eye()], x: xpos(worldWidth/2 + 7), y: ypos(worldHeight - 78.5)}
+}
+
+// ----------- robot type 1 -------------------
+
+var bottom1 = function () {
+  return {shape: shape(), static: true, dims: [dimB() + 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight- 20)}
+}
+
+var top1 = function () {
+  return {shape: shape(), static: true, dims: [dimA() + 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight - 80)}
+}
+
+var robot1 = [ground, top1(), bottom1(), body(), eye1(), eye2()]
+//var head1 = top1().dims[0]
+//var body1 = bottom1().dims[0]
+//var HeadBodySpacing1 = top1().dims[0] - bottom1().dims[0]
+
+
+// ----------- robot type 2 -------------------
+
+var bottom2 = function () {
+  return {shape: shape(), static: true, dims: [dimB() - 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight- 20)}
+}
+
+var top2 = function () {
+  return {shape: shape(), static: true, dims: [dimA() - 10, dim_static()], x: xpos(worldWidth/2), y: ypos(worldHeight - 80)}
+}
+
+var robot2 = [ground, top2(), bottom2(), body(), eye1(), eye2()]
+//var head2 = top2().dims[0]
+//var body2 = bottom2().dims[0]
+//var HeadBodySpacing2 = top2().dims[0] - bottom2().dims[0]
+
+// ----------- create world -------------------
+
+var whichRobot = function () { flip() ? robot1 : robot2 }
+
+var fallingWorld = whichRobot()
+print(fallingWorld[1].dims[0])
+print(fallingWorld[2].dims[0])
+print(fallingWorld[1].dims[0]-fallingWorld[2].dims[0])
+
+physics.animate(10,fallingWorld);</textarea><div class="CodeMirror cm-s-default"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 145px; left: 215px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true" style="width: 18px; pointer-events: none;"><div style="min-width: 1px; height: 0px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true" style="height: 18px; pointer-events: none; right: 0px; left: 0px; display: block;"><div style="height: 100%; min-height: 1px; width: 875px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1" draggable="false"><div class="CodeMirror-sizer" style="margin-left: 0px; min-width: 875px; margin-bottom: 0px; border-right-width: 30px; min-height: 1588px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors" style="visibility: hidden;"><div class="CodeMirror-cursor" style="left: 214px; top: 140px; height: 20px;">&nbsp;</div></div><div class="CodeMirror-code"><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-comment">// Robot factory generative model</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-comment">// CEK, December 2016</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-comment">// ----------- define properties -------------------</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">dim_high</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () { <span class="cm-variable">uniform</span>(<span class="cm-number">15</span>, <span class="cm-number">60</span>) }</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">dim_low</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () { <span class="cm-variable">uniform</span>(<span class="cm-number">25</span>, <span class="cm-number">40</span>) }</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">dimA</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>() { <span class="cm-variable">gaussian</span>(<span class="cm-number">30</span>,<span class="cm-number">10</span>) };</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">dimB</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span>() { <span class="cm-variable">gaussian</span>(<span class="cm-number">30</span>,<span class="cm-number">25</span>) }</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">dim_static</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () { <span class="cm-number">10</span> }</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">dim_body1</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () { <span class="cm-number">20</span> }</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">dim_body2</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () { <span class="cm-number">1</span> }</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">dim_eye</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () { <span class="cm-number">4</span> }</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-comment">//var shape = function () { flip() ? 'circle' : 'rect' }</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">shape</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () { <span class="cm-string">'rect'</span> }</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">xpos</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> (<span class="cm-def">x</span>) { <span class="cm-variable-2">x</span> }<span class="cm-comment">//worldWidth/2}//uniform(100, worldWidth - 100) }</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">ypos</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> (<span class="cm-def">y</span>) { <span class="cm-variable-2">y</span> }<span class="cm-comment">//worldHeight/2}//uniform(100, worldHeight - 100) }</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">eye</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () { <span class="cm-string">'circle'</span> }</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">ground</span> <span class="cm-operator">=</span> {<span class="cm-property">shape</span>: <span class="cm-string">'rect'</span>,</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">              <span class="cm-property">static</span>: <span class="cm-atom">true</span>,</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">              <span class="cm-property">dims</span>: [<span class="cm-variable">worldWidth</span>, <span class="cm-number">10</span>],</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">              <span class="cm-property">x</span>: <span class="cm-variable">worldWidth</span><span class="cm-operator">/</span><span class="cm-number">2</span>,</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">              <span class="cm-property">y</span>: <span class="cm-variable">worldHeight</span>}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-comment">// ----------- shared features -------------------</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">body</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () {</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">  <span class="cm-keyword">return</span> {<span class="cm-property">shape</span>: <span class="cm-variable">shape</span>(), <span class="cm-property">static</span>: <span class="cm-atom">true</span>, <span class="cm-property">dims</span>: [<span class="cm-variable">dim_body2</span>(), <span class="cm-variable">dim_body1</span>()], <span class="cm-property">x</span>: <span class="cm-variable">xpos</span>(<span class="cm-variable">worldWidth</span><span class="cm-operator">/</span><span class="cm-number">2</span>), <span class="cm-property">y</span>: <span class="cm-variable">ypos</span>(<span class="cm-variable">worldHeight</span><span class="cm-operator">-</span><span class="cm-number">50</span>)}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">eye1</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () {</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">  <span class="cm-keyword">return</span> {<span class="cm-property">shape</span>: <span class="cm-variable">eye</span>(), <span class="cm-property">static</span>: <span class="cm-atom">true</span>, <span class="cm-property">dims</span>: [<span class="cm-variable">dim_eye</span>(), <span class="cm-variable">dim_eye</span>()], <span class="cm-property">x</span>: <span class="cm-variable">xpos</span>(<span class="cm-variable">worldWidth</span><span class="cm-operator">/</span><span class="cm-number">2</span> <span class="cm-operator">-</span> <span class="cm-number">7</span>), <span class="cm-property">y</span>: <span class="cm-variable">ypos</span>(<span class="cm-variable">worldHeight</span> <span class="cm-operator">-</span> <span class="cm-number">78.5</span>)}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">eye2</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () {</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">  <span class="cm-keyword">return</span> {<span class="cm-property">shape</span>: <span class="cm-variable">eye</span>(), <span class="cm-property">static</span>: <span class="cm-atom">true</span>, <span class="cm-property">dims</span>: [<span class="cm-variable">dim_eye</span>(), <span class="cm-variable">dim_eye</span>()], <span class="cm-property">x</span>: <span class="cm-variable">xpos</span>(<span class="cm-variable">worldWidth</span><span class="cm-operator">/</span><span class="cm-number">2</span> <span class="cm-operator">+</span> <span class="cm-number">7</span>), <span class="cm-property">y</span>: <span class="cm-variable">ypos</span>(<span class="cm-variable">worldHeight</span> <span class="cm-operator">-</span> <span class="cm-number">78.5</span>)}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-comment">// ----------- robot type 1 -------------------</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">bottom1</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () {</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">  <span class="cm-keyword">return</span> {<span class="cm-property">shape</span>: <span class="cm-variable">shape</span>(), <span class="cm-property">static</span>: <span class="cm-atom">true</span>, <span class="cm-property">dims</span>: [<span class="cm-variable">dimB</span>() <span class="cm-operator">+</span> <span class="cm-number">10</span>, <span class="cm-variable">dim_static</span>()], <span class="cm-property">x</span>: <span class="cm-variable">xpos</span>(<span class="cm-variable">worldWidth</span><span class="cm-operator">/</span><span class="cm-number">2</span>), <span class="cm-property">y</span>: <span class="cm-variable">ypos</span>(<span class="cm-variable">worldHeight</span><span class="cm-operator">-</span> <span class="cm-number">20</span>)}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">top1</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () {</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">  <span class="cm-keyword">return</span> {<span class="cm-property">shape</span>: <span class="cm-variable">shape</span>(), <span class="cm-property">static</span>: <span class="cm-atom">true</span>, <span class="cm-property">dims</span>: [<span class="cm-variable">dimA</span>() <span class="cm-operator">+</span> <span class="cm-number">10</span>, <span class="cm-variable">dim_static</span>()], <span class="cm-property">x</span>: <span class="cm-variable">xpos</span>(<span class="cm-variable">worldWidth</span><span class="cm-operator">/</span><span class="cm-number">2</span>), <span class="cm-property">y</span>: <span class="cm-variable">ypos</span>(<span class="cm-variable">worldHeight</span> <span class="cm-operator">-</span> <span class="cm-number">80</span>)}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">robot1</span> <span class="cm-operator">=</span> [<span class="cm-variable">ground</span>, <span class="cm-variable">top1</span>(), <span class="cm-variable">bottom1</span>(), <span class="cm-variable">body</span>(), <span class="cm-variable">eye1</span>(), <span class="cm-variable">eye2</span>()]</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-comment">//var head1 = top1().dims[0]</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-comment">//var body1 = bottom1().dims[0]</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-comment">//var HeadBodySpacing1 = top1().dims[0] - bottom1().dims[0]</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-comment">// ----------- robot type 2 -------------------</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">bottom2</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () {</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">  <span class="cm-keyword">return</span> {<span class="cm-property">shape</span>: <span class="cm-variable">shape</span>(), <span class="cm-property">static</span>: <span class="cm-atom">true</span>, <span class="cm-property">dims</span>: [<span class="cm-variable">dimB</span>() <span class="cm-operator">-</span> <span class="cm-number">10</span>, <span class="cm-variable">dim_static</span>()], <span class="cm-property">x</span>: <span class="cm-variable">xpos</span>(<span class="cm-variable">worldWidth</span><span class="cm-operator">/</span><span class="cm-number">2</span>), <span class="cm-property">y</span>: <span class="cm-variable">ypos</span>(<span class="cm-variable">worldHeight</span><span class="cm-operator">-</span> <span class="cm-number">20</span>)}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">top2</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () {</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">  <span class="cm-keyword">return</span> {<span class="cm-property">shape</span>: <span class="cm-variable">shape</span>(), <span class="cm-property">static</span>: <span class="cm-atom">true</span>, <span class="cm-property">dims</span>: [<span class="cm-variable">dimA</span>() <span class="cm-operator">-</span> <span class="cm-number">10</span>, <span class="cm-variable">dim_static</span>()], <span class="cm-property">x</span>: <span class="cm-variable">xpos</span>(<span class="cm-variable">worldWidth</span><span class="cm-operator">/</span><span class="cm-number">2</span>), <span class="cm-property">y</span>: <span class="cm-variable">ypos</span>(<span class="cm-variable">worldHeight</span> <span class="cm-operator">-</span> <span class="cm-number">80</span>)}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;">}</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">robot2</span> <span class="cm-operator">=</span> [<span class="cm-variable">ground</span>, <span class="cm-variable">top2</span>(), <span class="cm-variable">bottom2</span>(), <span class="cm-variable">body</span>(), <span class="cm-variable">eye1</span>(), <span class="cm-variable">eye2</span>()]</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-comment">//var head2 = top2().dims[0]</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-comment">//var body2 = bottom2().dims[0]</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-comment">//var HeadBodySpacing2 = top2().dims[0] - bottom2().dims[0]</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-comment">// ----------- create world -------------------</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">whichRobot</span> <span class="cm-operator">=</span> <span class="cm-keyword">function</span> () { <span class="cm-variable">flip</span>() <span class="cm-operator">?</span> <span class="cm-variable">robot1</span> : <span class="cm-variable">robot2</span> }</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-keyword">var</span> <span class="cm-def">fallingWorld</span> <span class="cm-operator">=</span> <span class="cm-variable">whichRobot</span>()</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-variable">print</span>(<span class="cm-variable">fallingWorld</span>[<span class="cm-number">1</span>].<span class="cm-property">dims</span>[<span class="cm-number">0</span>])</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-variable">print</span>(<span class="cm-variable">fallingWorld</span>[<span class="cm-number">2</span>].<span class="cm-property">dims</span>[<span class="cm-number">0</span>])</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-variable">print</span>(<span class="cm-variable">fallingWorld</span>[<span class="cm-number">1</span>].<span class="cm-property">dims</span>[<span class="cm-number">0</span>]<span class="cm-operator">-</span><span class="cm-variable">fallingWorld</span>[<span class="cm-number">2</span>].<span class="cm-property">dims</span>[<span class="cm-number">0</span>])</span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span cm-text="">​</span></span></pre><pre class=" CodeMirror-line "><span style="padding-right: 0.1px;"><span class="cm-variable">physics</span>.<span class="cm-property">animate</span>(<span class="cm-number">10</span>,<span class="cm-variable">fallingWorld</span>);</span></pre><pre class=" CodeMirror-line " style="display: none;"><span style="padding-right: 0.1px;">  <span class="cm-keyword">return</span> {<span class="cm-property">shape</span>: <span class="cm-variable">shape</span>(), <span class="cm-property">static</span>: <span class="cm-atom">true</span>, <span class="cm-property">dims</span>: [<span class="cm-variable">dimB</span>() <span class="cm-operator">-</span> <span class="cm-number">10</span>, <span class="cm-variable">dim_static</span>()], <span class="cm-property">x</span>: <span class="cm-variable">xpos</span>(<span class="cm-variable">worldWidth</span><span class="cm-operator">/</span><span class="cm-number">2</span>), <span class="cm-property">y</span>: <span class="cm-variable">ypos</span>(<span class="cm-variable">worldHeight</span><span class="cm-operator">-</span> <span class="cm-number">20</span>)}</span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom: 0px solid transparent; top: 1588px;"></div><div class="CodeMirror-gutters" style="display: none; height: 1618px;"></div></div></div></div><button class="run" type="button">run</button><button class="cancel hide">cancel</button><button class="drawerButton">▼</button><div class="meta hide"><div><b>webppl</b><!-- react-text: 10 -->: <!-- /react-text --><!-- react-text: 11 -->v0.9.6-a3fae91<!-- /react-text --></div><div><b>packages</b><!-- react-text: 14 -->: <!-- /react-text --><!-- react-text: 15 --><!-- /react-text --></div><div><b>seed</b><!-- react-text: 18 -->: <!-- /react-text --><!-- react-text: 37 -->1481140794293<!-- /react-text --></div><div><b>compile</b><!-- react-text: 21 -->: <!-- /react-text --><!-- react-text: 36 -->cached<!-- /react-text --></div><div><b>run</b><!-- react-text: 24 -->: <!-- /react-text --><!-- react-text: 47 -->7345.799s<!-- /react-text --></div></div><div class="result " style="min-height: 598px;"><button class="clearButton idle">X</button><div><span class="icon log"></span><span class="count"></span><pre class="text">19.277011157339402</pre></div><div><span class="icon log"></span><span class="count"></span><pre class="text">45.20035731130298</pre></div><div><span class="icon log"></span><span class="count"></span><pre class="text">-25.92334615396358</pre></div><div class="custom"><div><canvas width="350" style="background-color:#333333;" height="500"></canvas><br><button>Simulate</button><button>Delete Animation Window</button></div></div><div><span class="icon log"></span><span class="count"></span><pre class="text"></pre></div></div></div></div>
+</div>
+
+<p>b) Are there worlds where your new model makes very different predictions about stability from the original model? Which best captures the meaning of “stable”? (it might be useful to actually code up your worlds and test them).</p>
+
+
+<!-- put big scripts at end so we don't block page load -->
+<script src="//s3-us-west-2.amazonaws.com/cdn.webppl.org/webppl-v0.9.6.js"></script>
+<script src="//s3-us-west-2.amazonaws.com/cdn.webppl.org/webppl-editor-70882ed.js"></script>
+<script src="//s3-us-west-2.amazonaws.com/cdn.webppl.org/webppl-viz-41e5d24.js"></script>
+
+
+    </div>
+
+  
+
+</body>
+</html>
+<!-- 
+<!doctype html>
+
+<html>
+	<head>
+		<title>ProbMods: Generative models</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+	    <meta http-equiv="Pragma" content="no-cache">
+	    <meta http-equiv="Expires" content="0">
+	    <link rel="stylesheet" type="text/css" href="style.css">
+	    <link rel="stylesheet" type="text/css" href="webchurch/online/css/codemirror.css">
+	    <link rel="stylesheet" type="text/css" href="webchurch/online/css/d3.css">
+	    <link rel="shortcut icon" href="images/favicon.ico">
+	    <script src="scripts/underscore-min.js"></script>
+	    <script src="scripts/jquery.js"></script>
+	    <link class="katex-include" rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css">
+	    <script class="katex-include" src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.js"></script>
+	    <script src="scripts/cookies-0.3.1.min.js"></script>
+	    <script src="scripts/gg.js"></script>
+	    <script src="scripts/nav.js"></script>
+	    <script src="scripts/cosmetics.js"></script>
+	    <script src="scripts/md5.js"></script>
+	    <script src="webchurch/online/webchurch.min.js"></script>
+	    <script src="scripts/globals.js"></script>
+	    <script src="webchurch/online/vega.min.js"></script>
+	    <script src="scripts/new-injector.js"></script>
+	    <script src="scripts/headroom.min.js"></script>
+	</head>
+	<body>
+  		<h1>Generating Robots</h1>
+  			<script src="plinko.js"></script>
+  		<h1>...Finished generating</h1>
+	</body>
+</html> -->

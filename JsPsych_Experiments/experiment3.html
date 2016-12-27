@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+  <head>
+    <title>My experiment</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="jspsych-5.0.3/jspsych.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-text.js"></script>
+    <script src="jspsych-5.0.3/plugins/jspsych-single-stim.js"></script>
+    <link href="jspsych-5.0.3/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body>
+  </body>
+  <script>
+
+  var opening_trial = {
+        type: 'text',
+        text: '<p>Factory Worker Briefing. </p><p>Stage 1.</p><p> Press A to continue.</p>'
+  };
+
+  var trial1 = {
+    type: "text",
+    text: "<p>Hey. I would say Welcome, or It's nice to have you here, but really, it's not.</p> <p>We need you to beat the Russians. This is stage 1 of your discrimmination training.</p><p>Press A to continue</p>"
+  }; 
+
+  var trial2 = {
+    type: "text",
+    text: "<p>You will be presented with a cluster of robots to observe. One of these will be labeled FEP.</p> <p>We are short on time, so you'll only see them for about 3 seconds.</p><p>FEPs are spontaneously combusting subterfuge robots that must be ID'd as quickly as possible in order to eliminate them.</p><p>In the following trials you'll see the new robots accquired from recent extraction missions, and you must say whether or not they are FEP robots.</p><p> Press F to indicate <strong>FEP</strong>, otherwise, do nothing.</p><p>Press A to continue</p>",
+    timing_post_trial: 2000
+  };
+
+  var trial3 = {
+    type: "text",
+    text: "<p>Get ready to observe the robots. Remember, you will only have 3 seconds.</p><p>Press A to <strong>begin</strong></p>",
+    timing_post_trial: 2000
+  };
+
+  var observation_screen = {
+    type: "single-stim",
+    stimulus: 'img/observationscreen.png',
+    timing_response: 3000
+  };
+
+  // Randomize the gap between trials
+  var post_trial_gap = function() {
+  return Math.floor( Math.random() * 1500 ) + 750;
+  };
+
+  // Constructing robot stimuli 
+  var test_stimuli = [
+    {
+      stimulus: "img/robot1.png",
+      data: { response: 'go' }
+    },
+    {
+      stimulus: "img/robot2.png",
+      data: { response: 'go' }
+    },
+    {
+      stimulus: "img/robot3.png",
+      data: { response: 'go' }
+    },
+    {
+      stimulus: "img/robot4.png",
+      data: { response: 'go' }
+    },
+    {
+      stimulus: "img/robot5.png",
+      data: { response: 'go' }
+    },
+    {
+      stimulus: "img/robot6.png",
+      data: { response: 'go' }
+    },
+    {
+      stimulus: "img/robot7.png",
+      data: { response: 'go' }
+    },
+    {
+      stimulus: "img/robot8.png",
+      data: { response: 'go' }
+    },
+    {
+      stimulus: "img/robot9.png",
+      data: { response: 'go' }
+    },
+    {
+      stimulus: "img/robot10.png",
+      data: { response: 'go' }
+    }
+  ];
+
+  // All test blocks
+  var all_trials = jsPsych.randomization.repeat(test_stimuli, 2);
+
+  var test_block = {
+    type: 'single-stim',
+    choices: ['F'],
+    timing_response: 2000,
+    timing_post_trial: post_trial_gap,
+    timeline: all_trials
+  };
+
+  // Here's the tricky part. Generate code in JS that generates robots like the ones in probmods
+  // var generate_robots = {
+
+  // }
+
+  var timeline = [];
+  timeline.push(opening_trial);
+  timeline.push(trial1);
+  timeline.push(trial2);
+  timeline.push(trial3);
+  timeline.push(observation_screen);
+  timeline.push(test_block);
+  // timeline.push(debrief);
+
+  jsPsych.init({
+      timeline: timeline
+  });
+</script>
+</html>

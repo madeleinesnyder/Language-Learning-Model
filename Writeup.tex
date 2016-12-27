@@ -23,12 +23,16 @@
 
 \vspace{.2in}
 
-\noindent Generative model parameters (in parens refers to term in the code):
+\noindent The task is for subjects to decide if a robot came from the FEP machine or not (is it a FEP or not?). The model reflects this by generating robots whose identities can be determined by sorting according to the dimension of highest variance, but not by sorting according to the dimension of lowest variance. The model is as follows: generate a bottom according to a normal distribution with high variance, then pair that bottom with a top generated from one of two other normal distributions each with variances that are lower than the bottom dimension variance but are not the same. 
+
+\vspace{.2in}
+
+\noindent Generative model parameters:
 \begin{itemize}
-	\item Robot head length $\sim N(\mu_1, \sigma_1)$ (Top)
-	\item Robot body length $\sim N(\mu_2, \sigma_2)$ (Bottom)
-	\item **Head length - Body Length = Diff $\sim N(\mu_1 - \mu_2, \sigma_1 + \sigma_2)$ (Diff)
-	\item Uniform distance between Head and Body (Body)
+	\item Robot bottom length $\sim N(\mu_1, \sigma_1)$ (Dimension that can diagnose robot's machine origin)
+	\item Robot top length $\sim N(\mu_2, \sigma_2)$ or $\sim N(\mu_3, \sigma_3)$ (Drawn from one of two distributions to fool the subject)
+	\item **Head length - Body Length = Diff $\sim N(\mu_1 - top\mu, \sigma_1 + top\sigma)$ (Diff)
+	\item Uniform distance between Head and Body
 	\item $\sigma_1 << \sigma_2$
 \end{itemize}
 
@@ -59,11 +63,20 @@
 \noindent Would the effect of categorizing by difference between Head and Body length be eliminated if you shortened the presentation time?
 
 \vspace{0.5in}
+
 \noindent TODO:
 \begin{itemize}
 	\item Modify the generative model such that there are actually two machines that generate robots whose identity can't be diagnosed by the dimension of least variance. 
 	\item Convert generative robot model to javascript (DONE)
 	\item Integrate with JsPsych to create experiment
+\end{itemize}
+
+\vspace{0.5in}
+\noindent Important Links
+\begin{itemize}
+	\item JsPsych: http://docs.jspsych.org/tutorials/rt-task/#part-9-displaying-the-data
+	\item ProbMods Playspace: https://probmods.org/v2/exercises/02-generative-models.html
+	\item 
 \end{itemize}
 
 \end{document}
