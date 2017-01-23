@@ -1,0 +1,39 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red53\green53\blue53;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab560
+\pard\pardeftab560\slleading20\partightenfactor0
+
+\f0\fs24 \cf2 //1D cluster model 1/22/17 CEK\
+\
+var observedData = [\{"name":"aa","x":9\},\{"name":"ab","x":8\},\{"name":"ac","x":9\},\{"name":"ad","x":8\},\{"name":"ae","x":9\},\{"name":"af","x":8\},\{"name":"ag","x":7\},\{"name":"ah","x":8\},\
+                    \{"name":"ba","x":1\},\{"name":"bb","x":2\},\{"name":"bc","x":1\},\{"name":"bd","x":2\},\{"name":"be","x":1\},\{"name":"bf","x":2\},\{"name":"bg","x":3\},\{"name":"bh","x":2\}\
+                   ]\
+\
+var obsFewData =   [\{"name":"aa","x":9\},\{"name":"ab\'94,\'94x\'94:8\},\
+                    \{"name":"ba","x":1\},\{"name":"bb","x":2\}\
+                   ]\
+                    \
+var predictives = Infer(\{method: 'MCMC', samples: 2000, lag: 50\}, function()\{\
+                    \
+  var catMixture = dirichlet(ones([2, 1]))\
+  \
+  var obsToCat = mem(function(obsName) \{\
+    return categorical(\{vs: ['cat1', 'cat2'],ps: T.toScalars(catMixture)\});\
+  \})\
+  var catToMean = mem(function(cat) \{\
+    return \{xMean: sample(RandomInteger(\{n:10\}))\}\
+  \})\
+\
+  var obsFn = function(datum)\{\
+    var mus = catToMean(obsToCat(datum.name))\
+    observe(Poisson(\{mu: mus.xMean\}), datum.x)\
+  \}\
+  mapData(\{data: observedData\}, obsFn)\
+\
+  return \{cat1: catToMean('cat1'),\
+          cat2: catToMean('cat2')\}\
+\})\
+\
+viz.marginals(predictives)}
