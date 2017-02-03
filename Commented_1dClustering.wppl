@@ -1,0 +1,64 @@
+//1D cluster model 1/22/17 CEK\
+
+var observedData = [{"name":"aa","x":9},{"name":"ab","x":8},{"name":"ac","x":9},{"name":"ad","x":8},{"name":"ae","x":9},{"name":"af","x":8},{"name":"ag","x":7},{"name":"ah","x":8},
+                    {"name":"ba","x":1},{"name":"bb","x":2},{"name":"bc","x":1},{"name":"bd","x":2},{"name":"be","x":1},{"name":"bf","x":2},{"name":"bg","x":3},{"name":"bh","x":2}
+                   ]
+
+var obsFewData =   [{"name":"aa","x":9},{"name":"ab","x":8},
+                    {"name":"ba","x":1},{"name":"bb","x":2}
+                   ]
+                    
+var predictives = Infer({method: 'MCMC', samples: 2000, lag: 50}, function(){
+  
+  // catMixture is a dirichlet distribution with alpha = [1,1], which means that there are the same number of each category
+  // Triangle thing: http://blog.bogatron.net/blog/2014/02/02/visualizing-dirichlet-distributions/
+  // Thus, catMixture is the prior distribution for the multinomial category probabilities
+  var catMixture = dirichlet(ones([2, 1]))
+  
+  var obsToCat = mem(function(obsName) {
+    // ps is the probability vector 
+    // vs are the categories to be distributed over with probabilities in ps
+    // this returns a categorical distribution sample parameterized by the dirichlet prior
+    return categorical({vs: ['cat1', 'cat2'],ps: T.toScalars(catMixture)});
+  })
+  display(obsToCat)
+  var catToMean = mem(function(cat) {
+    // RandomInteger takes a uniformly distributed value from 1 to n (10 in this case).
+    // This is selecting a random mean for each category
+    return {xMean: sample(RandomInteger({n:10}))}
+  })
+
+  var obsFn = function(datum){
+    // take the observed datum's name (like aa)
+    // assign the category probability to the datum's name from the catMixture prior
+    // randomly choose a mean for that category between 1 and 10
+    var mus = catToMean(obsToCat(datum.name))
+    
+    // generate a Poisson distribution with the mean of the category to which the datum name was assigned
+    // how likely is it that you'll get the data you observed from the name from a Poisson with the mu of the datum's category mu?
+    observe(Poisson({mu: mus.xMean}), datum.x)
+  }
+  
+  // Maps function obsFn over the array observedData.
+  // For each observation... 
+         // it takes the name, 
+         // assigns it a probability that it'll be in either category,
+         // randomly chooses a mean for each cateogory 
+         // sees how likely it is that the datum's length came from a Poisson of each mean
+  mapData({data: observedData}, obsFn)
+
+  // returns the distribution of how many times each cat was selected
+  return {cat1: catToMean('cat1'),
+          cat2: catToMean('cat2')}
+})
+
+// What is updated is the parametarization of the Dirichlet prior. 
+// Changing this changes how likely it is that either category will be selected (Changes flexbility of cats)
+// This in turn changes the categorical distribution of each sample.
+// It's done through the process of 'if I have this datapoint, how likely is it that it came from this mean?'
+// If unlikely, it updates as such and sorts it into the other category. If likely, it sorts it into this category.
+
+// To change this model we want an additional process where the label affects the Dirichlet alpha
+
+
+viz.marginals(predictives)
