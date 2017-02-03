@@ -7,6 +7,9 @@
 \usepackage[T1]{fontenc}
 \usepackage{kpfonts,baskervald}
 \usepackage{lipsum}
+\usepackage[OT1]{fontenc}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
 
 \title{How do we sort these goddamn robots: Label availability changes object classification method}
 \author{Cody Kommers, Maddie Snyder}
@@ -87,12 +90,24 @@
 
 \noindent Generative Model Development Process:
 
-1D clustering --> 1D labeling --> 2D clustering --> 2D labeling
+1D clustering $\rightarrow$ 1D labeling $\rightarrow$ 2D clustering $\rightarrow$ 2D labeling
 
 \vspace{.2in}
 
 1D clustering model informed by Gibson 2013.
 
-Generate examples from a mixture of two Gaussians 
+Some notation:
+
+\vspace{.1in}
+
+Let $Y$ be the probability that an object of a given length falls into one of two categories.
+
+$Y \sim P(\vec{A}, x_i)$ where $x_i$ are the $i$ unlabeled observations and $\vec{A}$ is the vector of categories.
+
+$Y \sim Cat([\text{cat1},\text{cat2}],\vec{p})$
+
+$\vec{A} \sim Dir(\vec{\alpha})$ where $\vec{\alpha} = [100,100]$ for unlabeled examples, but changed as labeled examples introduced.
+
+$\vec{\alpha} \sim Pois(\mu \text{ of the given category label})$
 
 \end{document}
